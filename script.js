@@ -1,35 +1,25 @@
 let countdownInterval;
-let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let beepSound, finishSound;
 
-function resumeAudioContext() {
-  if (audioContext.state === 'suspended') {
-    audioContext.resume();
-  }
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize audio objects
+  beepSound = new Audio('https://freesound.org/data/previews/80/80921_1022651-lq.mp3'); // Beep sound
+  finishSound = new Audio('/Users/abishek/Library/Mobile Documents/com~apple~CloudDocs/Timer/final.mp3'); // Finish sound
 
-function beep(frequency = 520, duration = 200) {
-  resumeAudioContext();
+  // Set the volume if necessary
+  beepSound.volume = 0.5;
+  finishSound.volume = 0.5;
 
-  let oscillator = audioContext.createOscillator();
-  let gainNode = audioContext.createGain();
+  // Attempt to "unlock" audio playback
+  document.getElementById('app').addEventListener('click', () => {
+    beepSound.play().then(() => beepSound.pause());
+    finishSound.play().then(() => finishSound.pause());
+  });
 
-  oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-
-  oscillator.frequency.value = frequency;
-  oscillator.type = "square";
-  gainNode.gain.setValueAtTime(1, audioContext.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration / 1000);
-
-  oscillator.start(audioContext.currentTime);
-  oscillator.stop(audioContext.currentTime + duration / 1000);
-}
-
-function playFinishSound() {
-  for (let i = 0; i < 3; i++) {
-    setTimeout(() => beep(440, 1000), i * 1100);
-  }
-}
+  // Event listeners for buttons
+  document.getElementById('reset-button').addEventListener('click', resetTimer);
+  document.getElementById('custom-time-button').addEventListener('click', setCustomTime);
+});
 
 function startCountdown(duration) {
   clearInterval(countdownInterval);
@@ -42,18 +32,18 @@ function startCountdown(duration) {
     let overlayHeight = (timer / duration) * 100;
     document.getElementById('overlay').style.height = overlayHeight + '%';
     document.getElementById('overlay').style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-   
- if (timer === Math.floor(duration / 2)) {
-      beep();
+
+    if (timer === Math.floor(duration / 2)) {
+      beepSound.currentTime = 0;
+      beepSound.play();
     } else if (timer <= 10 && timer > 0) {
-      beep();
-      
+      beepSound.currentTime = 0;
+      beepSound.play();
     } else if (timer === 0) {
       clearInterval(countdownInterval);
       playFinishSound();
       document.getElementById('overlay').style.backgroundColor = 'rgba(255, 0, 0, 0.9)';
     }
-
   }, 1000);
 }
 
@@ -79,12 +69,21 @@ function setCustomTime() {
   }
 }
 
+function playFinishSound() {
+  finishSound.currentTime = 0;
+  finishSound.play();
+  setTimeout(() => {
+    finishSound.currentTime = 0;
+    finishSound.play();
+  }, 1100);
+  setTimeout(() => {
+    finishSound.currentTime = 0;
+    finishSound.play();
+  }, 2200);
+}
+
 function resetTimer() {
   clearInterval(countdownInterval);
   document.getElementById('timer').textContent = "00:00";
   document.getElementById('overlay').style.height = '0%';
 }
-
-document.getElementById('reset-button').addEventListener('click', resetTimer);
-document.getElementById('custom-time-button').addEventListener('click', setCustomTime);
-

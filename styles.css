@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+  overflow: hidden;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#timer {
+  font-size: 5em;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  font-size: 1em;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+input {
+  font-size: 1em;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(40, 44, 52, 0.1);
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.5s;
+}
+

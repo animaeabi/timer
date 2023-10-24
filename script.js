@@ -4,7 +4,7 @@ let beepSound, finishSound;
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize audio objects
   beepSound = new Audio('https://freesound.org/data/previews/80/80921_1022651-lq.mp3'); // Beep sound
-  finishSound = new Audio('/Users/abishek/Library/Mobile Documents/com~apple~CloudDocs/Timer/final.mp3'); // Finish sound
+  finishSound = new Audio('final.mp3'); // Finish sound
 
   // Set the volume if necessary
   beepSound.volume = 0.5;

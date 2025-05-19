@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5; /* Light gray background */
-  color: #333333; /* Dark gray text */
+  background-color: #000000; /* Black background */
+  color: #f0f0f0; /* Light gray text for body */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,8 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   margin: 20px auto; /* Centering and some margin */
-  z-index: 10;
+  position: relative; /* Ensure stacking context */
+  z-index: 20; /* Higher z-index */
   width: 100%; /* Responsive width */
   box-sizing: border-box;
 }
@@ -133,7 +134,7 @@ button:active {
   /* height is controlled by JS */
   background-color: rgba(0, 123, 255, 0.1); /* Use accent color with alpha */
   transition: height 1s linear, background-color 1s linear; /* Smooth transition for color too */
-  z-index: 5; /* Below timer-container */
+  z-index: 10; /* Below timer-container, but higher than default */
 }
 
 /* Responsive adjustments */

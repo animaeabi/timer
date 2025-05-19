@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startCountdown(duration) {
   clearInterval(countdownInterval);
+  countdownInterval = null;
   let timer = duration;
   updateTimerDisplay(timer);
   countdownInterval = setInterval(() => {
@@ -91,6 +92,7 @@ function playFinishSound() {
 
 function resetTimer() {
   clearInterval(countdownInterval);
+  countdownInterval = null;
   document.getElementById('timer').textContent = "00:00";
   document.getElementById('overlay').style.height = '0%';
 }

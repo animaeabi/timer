@@ -1,52 +1,164 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #282c34;
-  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5; /* Light gray background */
+  color: #333333; /* Dark gray text */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh; /* Use min-height for flexibility */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  padding: 20px; /* Add some padding for smaller viewports */
+  box-sizing: border-box;
 }
 
 #app {
   position: relative;
   text-align: center;
+  width: 100%; /* Allow app to take width for centering timer-container */
 }
 
 #timer-container {
+  background-color: #ffffff; /* White card background */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto; /* Centering and some margin */
   z-index: 10;
+  width: 100%; /* Responsive width */
+  box-sizing: border-box;
 }
 
 #timer {
-  font-size: 5rem;
-  margin: 0;
+  font-size: 5.5rem; /* Slightly larger */
+  font-weight: 700; /* Bolder */
+  color: #212529; /* Prominent dark color */
+  margin-bottom: 25px; /* Space below timer */
 }
 
+/* General styles for input and all buttons */
 #custom-time-input,
 button {
-  margin-top: 20px;
-  padding: 10px;
+  font-family: inherit; /* Inherit from body */
   font-size: 1rem;
+  padding: 12px 18px; /* Slightly more padding */
+  margin-top: 0; /* Remove individual top margin, handle with container/flex gap */
+  margin-bottom: 15px; /* Consistent bottom margin */
+  border: 1px solid #ced4da; /* Subtle border */
+  border-radius: 6px; /* Slightly rounded corners */
+  box-sizing: border-box;
+  width: 100%; /* Make them full width initially, adjust in containers */
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Input field specific styles */
+#custom-time-input {
+  background-color: #ffffff;
+  color: #495057;
+}
+
+#custom-time-input:focus {
+  border-color: #80bdff; /* Blue border on focus */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* General button styling */
+button {
+  background-color: #007bff; /* Primary accent color */
+  color: white;
+  border-color: #007bff;
+  cursor: pointer;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker on hover */
+  border-color: #0056b3;
+}
+
+button:active {
+  background-color: #004085; /* Even darker on active */
+  border-color: #004085;
+}
+
+/* Container for preset buttons */
+#preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Spacing between buttons */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Preset buttons specifically - they are already 'button' elements */
+#preset-buttons button {
+  width: auto; /* Allow them to size based on content + padding */
+  /* margin is handled by gap now */
+  margin-top: 0; 
+  margin-bottom: 0;
+}
+
+/* Custom time button - specific if needed, but general button style should cover it */
+#custom-time-button {
+   /* width: 100%; already set by general button */
+}
+
+/* Reset button - different color */
+#reset-button {
+  background-color: #6c757d; /* Secondary/gray color */
+  border-color: #6c757d;
+  width: 100%; /* Make reset full width */
+}
+
+#reset-button:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+#reset-button:active {
+  background-color: #4e555b;
+  border-color: #494f54;
 }
 
 #overlay {
-  position: relative;
-  bottom: 0;
+  position: fixed; /* Changed to fixed to cover whole screen */
+  top: 0; /* Ensure it starts from the very top */
   left: 0;
-  right: 0;
-  background-color: rgba(40, 44, 52, 0.1);
-  transition: height 1s linear;
+  width: 100%; /* Cover full width */
+  /* height is controlled by JS */
+  background-color: rgba(0, 123, 255, 0.1); /* Use accent color with alpha */
+  transition: height 1s linear, background-color 1s linear; /* Smooth transition for color too */
+  z-index: 5; /* Below timer-container */
 }
 
+/* Responsive adjustments */
 @media (max-width: 600px) {
+  body {
+    padding: 10px; /* Reduce padding on small screens */
+  }
+
+  #timer-container {
+    padding: 20px; /* Reduce padding in the card */
+    margin: 10px auto;
+  }
+
   #timer {
-    font-size: 3rem;
+    font-size: 4rem; /* Adjust timer font size */
+    margin-bottom: 20px;
   }
 
   #custom-time-input,
   button {
-    font-size: 0.8rem;
+    font-size: 0.9rem; /* Adjust font size for inputs and buttons */
+    padding: 10px 15px;
+  }
+
+  #preset-buttons {
+    gap: 8px; /* Slightly reduce gap */
   }
 }

@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event listeners for buttons
   document.getElementById('reset-button').addEventListener('click', resetTimer);
   document.getElementById('custom-time-button').addEventListener('click', setCustomTime);
+
+  // Preset timer buttons
+  document.getElementById('preset-1m').addEventListener('click', () => startCountdown(60));
+  document.getElementById('preset-5m').addEventListener('click', () => startCountdown(300));
+  document.getElementById('preset-10m').addEventListener('click', () => startCountdown(600));
+  document.getElementById('preset-15m').addEventListener('click', () => startCountdown(900));
+  document.getElementById('preset-30m').addEventListener('click', () => startCountdown(1800));
 });
 
 function startCountdown(duration) {

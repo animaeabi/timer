@@ -19,7 +19,7 @@ body {
 }
 
 #timer-container {
-  background-color: #ffffff; /* White card background */
+  background-color: #e0e0e0; /* Lighter gray card background */
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -29,6 +29,8 @@ body {
   z-index: 20; /* Higher z-index */
   width: 100%; /* Responsive width */
   box-sizing: border-box;
+  /* Ensure overflow is hidden if overlay tries to escape due to border-radius */
+  overflow: hidden; 
 }
 
 #timer {
@@ -127,14 +129,25 @@ button:active {
 }
 
 #overlay {
-  position: fixed; /* Changed to fixed to cover whole screen */
-  top: 0; /* Ensure it starts from the very top */
+  position: absolute; /* Changed for internal positioning */
+  top: 0; 
   left: 0;
-  width: 100%; /* Cover full width */
-  /* height is controlled by JS */
-  background-color: rgba(0, 123, 255, 0.1); /* Use accent color with alpha */
-  transition: height 1s linear, background-color 1s linear; /* Smooth transition for color too */
-  z-index: 10; /* Below timer-container, but higher than default */
+  right: 0;  /* Ensures it spans full width of parent */
+  bottom: 0; /* Ensures it spans full height of parent initially (but height is controlled) */
+  height: 0%; /* Initial height, JS will control this */
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  transition: height 1s linear, background-color 1s linear; 
+  z-index: 1; /* Below timer-container's content, but above its background */
+}
+
+/* Ensure timer-container's direct children (except overlay) are above the overlay */
+#timer-container > #timer,
+#timer-container > #custom-time-input,
+#timer-container > #custom-time-button,
+#timer-container > #preset-buttons,
+#timer-container > #reset-button {
+  position: relative;
+  z-index: 2;
 }
 
 /* Responsive adjustments */
